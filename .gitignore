@@ -1,0 +1,11 @@
+# Ignore build output, IDE files, generated artifacts, secrets
+target/
+.idea/
+*.iml
+.vscode/
+allure-results/
+allure-report/
+screenshots/
+logs/
+.env
+*.log
