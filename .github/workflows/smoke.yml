@@ -1,13 +1,14 @@
-name: E2E Tests
+name: Smoke Tests
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "0 3 * * *"
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
-  e2e:
-    name: E2E – ${{ matrix.browser }}
+  smoke:
+    name: Smoke – ${{ matrix.browser }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -25,17 +26,24 @@ jobs:
           java-version: "17"
           cache: maven
 
-      - name: Run E2E tests
+      - name: Run smoke tests
         run: |
           mvn -B test \
+            -Psmoke \
             -Denv=qa \
             -Dbrowser=${{ matrix.browser }} \
-            -Dheadless=true \
-            -DsuiteXmlFile=src/test/resources/suites/regression.xml
+            -Dheadless=true
 
       - name: Upload Allure results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results-${{ matrix.browser }}
+          name: allure-results-smoke-${{ matrix.browser }}
           path: target/allure-results
+
+      - name: Upload Extent report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report-smoke-${{ matrix.browser }}
+          path: test-output/extent
