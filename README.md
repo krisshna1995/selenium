@@ -10,7 +10,7 @@ Production-grade test automation framework built with **Selenium 4**, **Java 17*
 | Language | Java 17 |
 | Build | Maven 3.9+ |
 | Test runner | TestNG 7.10.2 |
-| BDD | Cucumber 7.18.0 |
+| BDD | Cucumber 7.15.0 |
 | Reporting | Allure 2.27 + ExtentReports 5 |
 | API testing | REST Assured 5.4.0 |
 | Logging | Log4j2 2.23.1 |

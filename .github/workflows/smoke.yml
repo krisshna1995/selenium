@@ -10,6 +10,8 @@ jobs:
   smoke:
     name: Smoke – ${{ matrix.browser }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
